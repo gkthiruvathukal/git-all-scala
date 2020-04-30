@@ -112,6 +112,18 @@ scala-2.11/
 .scala_dependencies
 .worksheet
 .idea/
-project/*
 git-all-scala.iml
 */target/*
+project/target/
+project/project/
+
+# qsub files
+*.cobaltlog
+*.error
+*.output
+
+# Misc
+submit-*.sh
+
+#
+experiments/
