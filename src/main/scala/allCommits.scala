@@ -16,13 +16,15 @@ object allCommits {
     val stride = config.stride.getOrElse(1)
 
     // These defaults are for use on our cluster...
-    val srcRoot = Path(new java.io.File(config.srcRoot.getOrElse("/projects/SE_HPC")))
-    val dstRoot = Path(new java.io.File(config.dstRoot.getOrElse("/scratch/SE_HPC")))
+    val srcRoot = Path(new java.io.File(config.srcRoot.getOrElse("/tmp")))
+    val dstRoot = Path(new java.io.File(config.dstRoot.getOrElse("/tmp")))
 
     //Establishes path for source folder where clone occurs and destination folder which will recieve every commit
     val sourcePath = srcRoot / sourceFolder
     val destinationPath = dstRoot / destinationFolder
 
+    println("Source path " + sourcePath)
+    println("Destination path " + destinationPath)
     //Checks whether these two folders already exist and if so exits the program and alerts the user
     if (exists ! sourcePath) {
       println("Source folder already exists cannot execute program")
@@ -34,7 +36,8 @@ object allCommits {
     }
 
     //Clones repo into source folder
-    %.git("clone", repoURL)( srcRoot )
+    ///%.git("clone", repoURL)( sourcePath )
+    %%("git","clone", repoURL, sourceFolder)(srcRoot)
 
     //Gets the hashs for each commit and prepares them as an iterator
     val logForList = hashCodes(srcRoot, sourceFolder).toList
@@ -42,19 +45,21 @@ object allCommits {
     val logIterator = currentNodeHashes.toIterator
 
     //Creates folder where all commits will be placed as subfolders
-    mkdir ! dstRoot / destinationFolder
+    mkdir ! destinationPath
+    println("Created " + destinationPath)
 
     //This loop creates a new folder for each commit and fills it with the files that were current as of that commit
     for (currentHash <- logIterator) {
-      mkdir ! destinationPath / currentHash
       var currentPath = destinationPath / currentHash
-      %.git('init)(currentPath)
+      mkdir ! currentPath
+      println("Created " + currentPath)
+      %%("git", "init", currentHash)(destinationPath)
       %%("git", "remote", "add", "upstream", sourcePath)(currentPath)
       %%("git", "fetch", "upstream")(currentPath)
       %%("git", "checkout", currentHash)(currentPath)
       if (config.cloc) {
-         var lines = %%("cloc", currentPath)(destinationPath)
-         println(lines)
+         %%("cloc", "--json", s"--out=${currentHash}.json", currentPath)(destinationPath)
+         println(s"Wrote cloc report to ${currentHash}.json")
       }
     }
   }
