@@ -14,8 +14,8 @@ def cmdLineParser() -> Namespace:
         "--url",
         nargs=1,
         default="https://github.com/SoftwareSystemsLaboratory/Metrics-Dashboard.git",
-        type=str,
         required=True,
+        type=str,
         help="The Git repository URL.",
     )
 
@@ -23,9 +23,9 @@ def cmdLineParser() -> Namespace:
         "-s",
         "--src",
         nargs=1,
-        type=str,
         default="Metrics-Dashboard",
         required=True,
+        type=str,
         help="The name of the Git repository. Must match the name of whatever the root folder of the Git repository is after executing 'git clone'.",
     )
 
@@ -34,16 +34,14 @@ def cmdLineParser() -> Namespace:
         nargs=1,
         default=1,
         type=int,
-        required=True,
         help="Allows for the downloading of hash codes to start with a hash code later than the first one. If left unspecified it is automatically set to 1 and every hash code is included.",
     )
 
     parser.add_argument(
         "--stride",
         nargs=1,
-        default=0,
+        default=1,
         type=int,
-        required=True,
         help="Allows you to skip every n hash codes. When used in conjunction with the start command it allows for the downloading of each hash to be spread more easily between compute nodes.",
     )
 
