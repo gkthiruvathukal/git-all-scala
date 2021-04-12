@@ -68,6 +68,7 @@ if __name__ == "__main__":
     chc = git.gitCommitHashCodes(sourceFolder=gce.src)
 
     # Iterate through the hash codes
+    count = 1
     for commit in chc:
         # Create a folder for that specific hash code
         gce.makeDesitinationPath(dst="output/" + commit)

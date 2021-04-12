@@ -26,7 +26,7 @@ class Git:
             )
         )
 
-    def gitCommitHashCodes(self, sourceFolder: str) -> list:
+    def gitCommitHashCodes(self, sourceFolder: str) -> set:
         output = []
 
         chdir(sourceFolder)
@@ -53,17 +53,14 @@ class Git:
             if commit == "":
                 output.pop(output.index(commit))
 
-        return output
+        return set(output)
 
     def gitRepoCreate(self, src: str, dst: str, chc) -> None:
-        src: str = "../" + src
+        src: str = self.cwd + "/" + src
+
         chdir(dst)
 
-        popen("git init")
-        print(getcwd())
-        popen("git remote add upstream {}".format(src))
-
-        # popen("git fetch upstream")
-        # popen("git checkout {}".format(chc))
+        system("git init -q")
+        system("git remote add upstream {}".format(src))
 
         chdir(self.cwd)
