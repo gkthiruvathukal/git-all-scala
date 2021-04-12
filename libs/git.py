@@ -1,4 +1,4 @@
-from os import popen, removexattr, system, chdir, getcwd
+from os import popen, system, chdir, getcwd
 from os.path import exists
 
 
@@ -62,5 +62,7 @@ class Git:
 
         system("git init -q")
         system("git remote add upstream {}".format(src))
+        system("git fetch upstream -q")
+        system("git checkout {} -q".format(chc))
 
         chdir(self.cwd)
