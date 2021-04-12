@@ -6,17 +6,17 @@ class Git:
     def __init__(self) -> None:
         self.gitFolderName = ".git"
         self.gitPath = "/usr/bin/git"
+        self.cwd = getcwd()
 
     def checkIfGitInstalled(self) -> bool:
         return exists(self.gitPath)
 
     def checkIfGitRepository(self, src: str) -> bool:
-        cwd = getcwd()
         chdir(src)
 
         val = exists(self.gitFolderName)
 
-        chdir(cwd)
+        chdir(self.cwd)
         return val
 
     def gitClone(self, repoURL: str, dst: str) -> int:
@@ -29,7 +29,6 @@ class Git:
     def gitCommitHashCodes(self, sourceFolder: str) -> list:
         output = []
 
-        cwd = getcwd()
         chdir(sourceFolder)
 
         branches: list = (
@@ -47,6 +46,14 @@ class Git:
             for message in logList:
                 if message.find("commit") != -1:
                     output.append(message.split(" ")[1])
-        chdir(cwd)
+        chdir(self.cwd)
 
         return output
+
+    def gitInit(self, src: str) -> int:
+        chdir(src)
+
+        command = popen("git init -q")
+
+        chdir(self.cwd)
+        return command

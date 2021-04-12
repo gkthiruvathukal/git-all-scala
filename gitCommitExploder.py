@@ -69,9 +69,10 @@ if __name__ == "__main__":
 
     # Iterate through the hash codes
     for commit in chc:
-
         # Create a folder for that specific hash code
         gce.makeDesitinationPath(dst="output/" + commit)
+
+        # Initalize git repository for that specific hash code
 
     # Delete git repository
     gce.deleteRepo()
