@@ -21,4 +21,9 @@
 - ~~`-d / --dst`: This argument is the user’s desired name for the result of the program.  It can be any name that is not already in use~~
 - `--start`: This argument allows for the downloading of hash codes to start with a hash code later than the first one.  If left unspecified it is automatically set to 1 and every hash code is included
 - `--stride`: This argument allows you to skip every n hash codes.  When used in conjunction with the start command it allows for the downloading of each hash to be spread more easily between compute nodes
+
 ## TODO
+
+1. Implement `--start` arguement
+2. Implement `--stride` arguement
+3. Dockerize project
