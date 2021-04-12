@@ -6,13 +6,13 @@ from libs.git import Git
 
 
 class GitCommitExploder:
-    def __init__(self, destinationFolder: str = "ouput") -> None:
+    def __init__(self, destinationFolder: str = "output") -> None:
         args = cmdLineParser()
         self.dst: str = destinationFolder
         self.repoURL: str = args.url[0]
         self.src: str = args.src[0]
-        self.start: int = args.start[0]
-        self.stride: int = args.stride[0]
+        self.start: int = args.start
+        self.stride: int = args.stride
 
     def checkSourcePathAvailibility(self) -> bool:
         return exists(self.src)
@@ -39,7 +39,7 @@ if __name__ == "__main__":
         exit(1)
 
     # Check to see if the Source folder already exists
-    if not gce.checkSourcePathAvailibility():
+    if gce.checkSourcePathAvailibility():
         print("{} already exists. Exiting program...".format(gce.src))
         exit(2)
 
