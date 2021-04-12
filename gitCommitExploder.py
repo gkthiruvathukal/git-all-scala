@@ -74,5 +74,7 @@ if __name__ == "__main__":
 
         # Initalize git repository for that specific hash code
 
+        git.gitInit(src="output/" + commit)
+
     # Delete git repository
     gce.deleteRepo()
