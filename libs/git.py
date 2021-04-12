@@ -3,9 +3,7 @@ from os.path import exists
 
 
 class Git:
-    def __init__(
-        self, gitFolderName: str = ".git", gitPath: str = "/usr/bin/git"
-    ) -> None:
+    def __init__(self) -> None:
         self.gitFolderName = ".git"
         self.gitPath = "/usr/bin/git"
 

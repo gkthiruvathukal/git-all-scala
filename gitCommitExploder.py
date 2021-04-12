@@ -26,3 +26,18 @@ class GitCommitExploder:
 
 if __name__ == "__main__":
     gce = GitCommitExploder()
+    git = Git()
+
+    # Check to see if git is installed
+
+    # Check to see if the Source folder already exists
+
+    # Check to see if the Output folder already exists
+
+    # Create the Output folder
+
+    # Clone the git repository
+
+    # Get the commit hash codes
+
+    # Create the folders from the hash codes
