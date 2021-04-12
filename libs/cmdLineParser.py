@@ -23,8 +23,7 @@ def cmdLineParser() -> Namespace:
         "-s",
         "--src",
         nargs=1,
-        default="Metrics-Dashboard",
-        required=True,
+        default="temp",
         type=str,
         help="The name of the Git repository. Must match the name of whatever the root folder of the Git repository is after executing 'git clone'.",
     )
