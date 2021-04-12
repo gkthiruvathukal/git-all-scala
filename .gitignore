@@ -115,4 +115,6 @@ scala-2.11/
 project/*
 git-all-scala.iml
 */target/*
+
 temp/
+output/

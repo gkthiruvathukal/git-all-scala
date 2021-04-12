@@ -72,9 +72,9 @@ if __name__ == "__main__":
         # Create a folder for that specific hash code
         gce.makeDesitinationPath(dst="output/" + commit)
 
-        # Initalize git repository for that specific hash code
-
-        git.gitInit(src="output/" + commit)
+        # Create git repo that tracks the changes for a specific commit
+        git.gitRepoCreate(src=gce.src, dst="output/" + commit, chc=commit)
+    quit()
 
     # Delete git repository
-    gce.deleteRepo()
+    # gce.deleteRepo()

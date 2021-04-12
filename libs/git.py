@@ -1,4 +1,4 @@
-from os import popen, system, chdir, getcwd
+from os import popen, removexattr, system, chdir, getcwd
 from os.path import exists
 
 
@@ -48,12 +48,22 @@ class Git:
                     output.append(message.split(" ")[1])
         chdir(self.cwd)
 
+        commit: str
+        for commit in output:
+            if commit == "":
+                output.pop(output.index(commit))
+
         return output
 
-    def gitInit(self, src: str) -> int:
-        chdir(src)
+    def gitRepoCreate(self, src: str, dst: str, chc) -> None:
+        src: str = "../" + src
+        chdir(dst)
 
-        command = popen("git init -q")
+        popen("git init")
+        print(getcwd())
+        popen("git remote add upstream {}".format(src))
+
+        # popen("git fetch upstream")
+        # popen("git checkout {}".format(chc))
 
         chdir(self.cwd)
-        return command
