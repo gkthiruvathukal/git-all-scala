@@ -14,7 +14,7 @@ class Git:
         return exists(self.gitFolderName)
 
     def gitClone(self, repoURL: str, dst: str) -> int:
-        return system("git clone {} {}-q".format(repoURL, dst))
+        return system("git clone {} {} -q".format(repoURL, dst))
 
     def gitCommitHashCodes(self, sourceFolder: str) -> list:
         output = []
