@@ -1,6 +1,6 @@
 # Git Commit Exploder
 
-> Program which checkouts all previous versions of a Git repository and stores them in a `../temp/` directory
+> Program which checkouts all previous versions of a Git repository and stores them in a `temp` directory
 
 ## Table of Contents
 
@@ -14,6 +14,10 @@
   - [TODO](#todo)
 
 ## About
+
+This program is meant to take a git repository, go through **EVERY** commit on **EVERY** branch in that repository and create a git repository initalized at that specific commit.
+
+As you can imagine, this program results in a considerable amount of computer storage being used up.
 
 ## How to Execute
 
