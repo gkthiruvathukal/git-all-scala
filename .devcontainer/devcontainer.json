@@ -1,0 +1,19 @@
+{
+    "name": "Git Commit Exploder",
+    "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "yzhang.markdown-all-in-one",
+        "ms-azuretools.vscode-docker"
+    ],
+    "settings": {
+        "python.autoComplete.addBrackets": true,
+        "python.autoUpdateLanguageServer": true,
+        "python.formatting.provider": "black",
+        "python.languageServer": "Pylance",
+        "python.linting.enabled": true,
+        "python.testing.unittestEnabled": true,
+        "python.analysis.completeFunctionParens": true,
+    },
+    "dockerFile": "Dockerfile",
+}
