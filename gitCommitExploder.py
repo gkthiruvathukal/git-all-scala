@@ -2,7 +2,6 @@ from os import mkdir
 from os.path import exists
 from shutil import rmtree
 
-
 from libs.cmdLineParser import cmdLineParser
 from libs.git import Git
 

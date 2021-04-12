@@ -1,4 +1,4 @@
-from os import popen, system, chdir, getcwd
+from os import chdir, getcwd, popen, system
 from os.path import exists
 
 
