@@ -21,7 +21,11 @@ class GitCommitExploder:
         return exists(self.dst)
 
     def makeDesitinationPath(self) -> bool:
-        mkdir(self.dst)
+        try:
+            mkdir(self.dst)
+        except FileExistsError:
+            return False
+        return True
 
 
 if __name__ == "__main__":
@@ -30,13 +34,27 @@ if __name__ == "__main__":
 
     # Check to see if git is installed
 
+    if not git.checkIfGitInstalled():
+        print("git is not installed. Exiting program...")
+        exit(1)
+
     # Check to see if the Source folder already exists
+    if not gce.checkSourcePathAvailibility():
+        print("{} already exists. Exiting program...".format(gce.src))
+        exit(2)
 
     # Check to see if the Output folder already exists
+    if type(gce.checkDestinationPathAvailibility()) is str:
+        print("Output folder has already been created. Exiting program...")
+        exit(3)
 
     # Create the Output folder
+    if not gce.makeDesitinationPath():
+        print("Unable to create output folder. Exiting program...")
+        exit(4)
 
     # Clone the git repository
+    git.gitClone(repoURL=gce.repoURL)
 
     # Get the commit hash codes
 
