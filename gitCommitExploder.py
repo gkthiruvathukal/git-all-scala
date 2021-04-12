@@ -75,7 +75,6 @@ if __name__ == "__main__":
 
         # Create git repo that tracks the changes for a specific commit
         git.gitRepoCreate(src=gce.src, dst="output/" + commit, chc=commit)
-    quit()
 
     # Delete git repository
-    # gce.deleteRepo()
+    gce.deleteRepo()
