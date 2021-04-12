@@ -60,4 +60,4 @@ if __name__ == "__main__":
 
     # Create the folders from the hash codes
     for commit in chc:
-        gce.makeDesitinationPath()
+        gce.makeDesitinationPath(dst="output/" + commit)
