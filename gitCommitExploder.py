@@ -60,11 +60,17 @@ if __name__ == "__main__":
     # Clone the git repository
     git.gitClone(repoURL=gce.repoURL, dst=gce.src)
 
+    # Check to make sure that the cloned repo is a git repository
+
+    git.checkIfGitRepository(src=gce.src)
+
     # Get the commit hash codes
     chc = git.gitCommitHashCodes(sourceFolder=gce.src)
 
-    # Create the folders from the hash codes
+    # Iterate through the hash codes
     for commit in chc:
+
+        # Create a folder for that specific hash code
         gce.makeDesitinationPath(dst="output/" + commit)
 
     # Delete git repository

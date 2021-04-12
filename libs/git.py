@@ -10,8 +10,14 @@ class Git:
     def checkIfGitInstalled(self) -> bool:
         return exists(self.gitPath)
 
-    def checkIfGitRepository(self) -> bool:
-        return exists(self.gitFolderName)
+    def checkIfGitRepository(self, src: str) -> bool:
+        cwd = getcwd()
+        chdir(src)
+
+        val = exists(self.gitFolderName)
+
+        chdir(cwd)
+        return val
 
     def gitClone(self, repoURL: str, dst: str) -> int:
         return system(
