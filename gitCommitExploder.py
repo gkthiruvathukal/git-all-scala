@@ -6,9 +6,8 @@ from libs.git import Git
 
 
 class GitCommitExploder:
-    def __init__(self, destinationFolder: str = "output") -> None:
+    def __init__(self) -> None:
         args = cmdLineParser()
-        self.dst: str = destinationFolder
         self.repoURL: str = args.url[0]
         self.src: str = args.src[0]
         self.start: int = args.start
@@ -17,12 +16,12 @@ class GitCommitExploder:
     def checkSourcePathAvailibility(self) -> bool:
         return exists(self.src)
 
-    def checkDestinationPathAvailibility(self) -> bool:
-        return exists(self.dst)
+    def checkDestinationPathAvailibility(self, dst: str = "output") -> bool:
+        return exists(dst)
 
-    def makeDesitinationPath(self) -> bool:
+    def makeDesitinationPath(self, dst: str = "output") -> bool:
         try:
-            mkdir(self.dst)
+            mkdir(dst)
         except FileExistsError:
             return False
         return True
@@ -57,5 +56,8 @@ if __name__ == "__main__":
     git.gitClone(repoURL=gce.repoURL)
 
     # Get the commit hash codes
+    chc = git.gitCommitHashCodes(sourceFolder=gce.src)
 
     # Create the folders from the hash codes
+    for commit in chc:
+        gce.makeDesitinationPath()
