@@ -18,10 +18,10 @@ class GitCommitExploder:
     def checkSourcePathAvailibility(self) -> bool:
         return exists(self.src)
 
-    def checkDestinationPathAvailibility(self, dst: str = "output") -> bool:
-        return exists(dst)
+    def checkDestinationPathAvailibility(self) -> bool:
+        return exists("output")
 
-    def makeDesitinationPath(self, dst: str = "output") -> bool:
+    def makeDesitinationPath(self, dst: str) -> bool:
         try:
             mkdir(dst)
         except FileExistsError:
@@ -53,7 +53,7 @@ if __name__ == "__main__":
         exit(3)
 
     # Create the Output folder
-    if not gce.makeDesitinationPath():
+    if not gce.makeDesitinationPath(dst="output"):
         print("Unable to create output folder. Exiting program...")
         exit(4)
 
