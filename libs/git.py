@@ -13,8 +13,8 @@ class Git:
     def checkIfGitRepository(self) -> bool:
         return exists(self.gitFolderName)
 
-    def gitClone(self, repoURL: str) -> int:
-        return system("git clone {} -q".format(repoURL))
+    def gitClone(self, repoURL: str, dst: str) -> int:
+        return system("git clone {} {}-q".format(repoURL, dst))
 
     def gitCommitHashCodes(self, sourceFolder: str) -> list:
         output = []

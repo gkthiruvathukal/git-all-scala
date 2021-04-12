@@ -1,5 +1,7 @@
 from os import mkdir
 from os.path import exists
+from shutil import rmtree
+
 
 from libs.cmdLineParser import cmdLineParser
 from libs.git import Git
@@ -25,6 +27,9 @@ class GitCommitExploder:
         except FileExistsError:
             return False
         return True
+
+    def deleteRepo(self) -> bool:
+        return rmtree(self.src)
 
 
 if __name__ == "__main__":
@@ -53,7 +58,7 @@ if __name__ == "__main__":
         exit(4)
 
     # Clone the git repository
-    git.gitClone(repoURL=gce.repoURL)
+    git.gitClone(repoURL=gce.repoURL, dst=gce.src)
 
     # Get the commit hash codes
     chc = git.gitCommitHashCodes(sourceFolder=gce.src)
@@ -61,3 +66,6 @@ if __name__ == "__main__":
     # Create the folders from the hash codes
     for commit in chc:
         gce.makeDesitinationPath(dst="output/" + commit)
+
+    # Delete git repository
+    gce.deleteRepo()
