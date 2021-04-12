@@ -1,6 +1,8 @@
 from os import chdir, getcwd, popen, system
 from os.path import exists
 
+from progress.bar import Bar
+
 
 class Git:
     def __init__(self) -> None:
@@ -35,17 +37,19 @@ class Git:
             popen("git branch").read().replace(" ", "").replace("*", "").split("\n")
         )
 
-        branch: str
-        for branch in branches:
-            system("git checkout {} -q".format(branch))
+        with Bar(message="Extracting commits from branches", max=len(branches)) as bar:
+            branch: str
+            for branch in branches:
+                system("git checkout {} -q".format(branch))
 
-            log: str = popen(cmd="git log").read()
-            logList: list = log.split("\n")
+                log: str = popen(cmd="git log").read()
+                logList: list = log.split("\n")
 
-            message: str
-            for message in logList:
-                if message.find("commit") != -1:
-                    output.append(message.split(" ")[1])
+                message: str
+                for message in logList:
+                    if message.find("commit") != -1:
+                        output.append(message.split(" ")[1])
+                bar.next()
         chdir(self.cwd)
 
         commit: str
